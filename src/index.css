@@ -1313,3 +1313,17 @@ html { scroll-behavior: smooth; }
     line-height: 1.7;
   }
 }
+
+
+/* Site-wide body-copy weight: improve contrast and legibility without changing the font family or layout */
+@layer base {
+  body {
+    font-weight: 500;
+  }
+
+  p,
+  li,
+  blockquote {
+    font-weight: 500;
+  }
+}
