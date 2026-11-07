@@ -10,7 +10,7 @@ import {
 } from 'react-router-dom';
 
 import ScrollToTop from '@/components/ScrollToTop.jsx';
-import MotionEnhancements from '@/components/MotionEnhancements.jsx';
+import MotionEnhancements, { consumeTransitionOrigin } from '@/components/MotionEnhancements.jsx';
 
 import HomePage from '@/pages/HomePage.jsx';
 import AboutUsPage from '@/pages/AboutUsPage.jsx';
@@ -819,6 +819,22 @@ function RequireAuth({ children }) {
    WEBSITE ROUTES
 ===================================================== */
 
+function RouteReveal({ children }) {
+  const [origin] = useState(() => consumeTransitionOrigin());
+  const clip = origin ? `circle(300vmax at ${origin.x}px ${origin.y}px)` : null;
+
+  return (
+    <motion.div
+      className="isats-route-transition"
+      initial={origin ? { clipPath: `circle(0px at ${origin.x}px ${origin.y}px)` } : { opacity: 0, y: 10 }}
+      animate={origin ? { clipPath: clip } : { opacity: 1, y: 0 }}
+      transition={{ duration: origin ? 0.82 : 0.32, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
 function MainWebsite() {
   const location = useLocation();
   return (
@@ -826,14 +842,7 @@ function MainWebsite() {
       <ScrollToTop />
       <MotionEnhancements />
       <AnimatePresence mode="wait" initial={false}>
-        <motion.div
-          key={location.pathname}
-          className="isats-route-transition"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -7 }}
-          transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-        >
+        <RouteReveal key={location.pathname}>
       <Routes location={location}>
         {/* Public pages */}
         <Route path="/" element={<HomePage />} />
@@ -911,7 +920,7 @@ function MainWebsite() {
           element={<Navigate to="/" replace />}
         />
       </Routes>
-        </motion.div>
+        </RouteReveal>
       </AnimatePresence>
     </>
   );
