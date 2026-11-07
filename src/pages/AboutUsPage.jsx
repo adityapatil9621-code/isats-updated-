@@ -37,7 +37,7 @@ export default function AboutUsPage() {
                 <Button asChild className="isats-about-hero-button"><Link to="/courses">Explore our courses <ArrowRight size={17} /></Link></Button>
               </motion.div>
               <motion.div className="isats-about-hero-image" initial={{ opacity: 0, scale: .96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: .7, delay: .1 }}>
-                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1100&q=85" alt="Professional healthcare learning environment" />
+                <img src="https://images.openai.com/static-rsc-4/HoVjiCmaU3Ebg8TY_M7bioPa3Hlman1dQOyJdYM7QtNxAG3-IhJWE2QmosUCC8n_sSs_EmH-nHDgxQob38ovEi8moE6NCEbPxt1S4LpycOMu2wlMYBD27RsNkdD3KXXGHnkVVvpO3hrK63rMDLg1Ek_G2-VzxkHhaH8sNazr4Ju578Fiv7_VzOj91C5896bv?purpose=inline" alt="Laboratory glassware and cosmetic bottles representing aesthetic science research and development" />
                 <div className="isats-about-image-label"><span>ISATS</span><strong>Institute of Skill-based Aesthetic & Trichology Sciences</strong></div>
               </motion.div>
             </div>
