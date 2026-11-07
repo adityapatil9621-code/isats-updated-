@@ -1,13 +1,16 @@
 
 import React, { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import {
   Route,
   Routes,
   BrowserRouter as Router,
-  Navigate
+  Navigate,
+  useLocation
 } from 'react-router-dom';
 
 import ScrollToTop from '@/components/ScrollToTop.jsx';
+import MotionEnhancements, { clearTransitionOrigin, consumeTransitionOrigin } from '@/components/MotionEnhancements.jsx';
 
 import HomePage from '@/pages/HomePage.jsx';
 import AboutUsPage from '@/pages/AboutUsPage.jsx';
@@ -816,12 +819,51 @@ function RequireAuth({ children }) {
    WEBSITE ROUTES
 ===================================================== */
 
+function RouteReveal({ children }) {
+  const [origin] = useState(() => consumeTransitionOrigin());
+
+  return (
+    <>
+      <motion.div
+        className="isats-route-transition"
+        initial={{ opacity: 0.72, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+      >
+        {children}
+      </motion.div>
+      {origin && (
+        <motion.div
+          aria-hidden="true"
+          className="isats-blue-page-reveal"
+          initial={{
+            clipPath: `circle(0px at ${origin.x}px ${origin.y}px)`,
+            opacity: 1
+          }}
+          animate={{
+            clipPath: `circle(160vmax at ${origin.x}px ${origin.y}px)`,
+            opacity: [1, 1, 0]
+          }}
+          transition={{
+            clipPath: { duration: 0.82, ease: [0.22, 1, 0.36, 1] },
+            opacity: { duration: 0.98, times: [0, 0.72, 1], ease: 'easeOut' }
+          }}
+          onAnimationComplete={clearTransitionOrigin}
+        />
+      )}
+    </>
+  );
+}
+
 function MainWebsite() {
+  const location = useLocation();
   return (
     <>
       <ScrollToTop />
-
-      <Routes>
+      <MotionEnhancements />
+      <AnimatePresence mode="wait" initial={false}>
+        <RouteReveal key={location.pathname}>
+      <Routes location={location}>
         {/* Public pages */}
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutUsPage />} />
@@ -898,6 +940,8 @@ function MainWebsite() {
           element={<Navigate to="/" replace />}
         />
       </Routes>
+        </RouteReveal>
+      </AnimatePresence>
     </>
   );
 }
