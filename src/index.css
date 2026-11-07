@@ -1128,3 +1128,67 @@ html { scroll-behavior: smooth; }
  .isats-programme-overline,.isats-programme-footnote { width:calc(100% - 36px); }
  .isats-programme-footnote { align-items:flex-start; flex-direction:column; }
 }
+
+
+/* Course details are split into focused tabs instead of one long expandable card */
+.isats-course-overview { width:min(100% - 48px,1160px); margin:0 auto 36px; padding:26px 30px; display:grid; grid-template-columns:58px minmax(0,1fr) auto; align-items:center; gap:20px; border:1px solid #deebe8; border-radius:18px; background:linear-gradient(110deg,#f5faf8,#fff 72%); box-shadow:0 12px 36px rgba(22,66,70,.045); }
+.isats-course-overview-icon { width:56px; height:56px; display:grid; place-items:center; border-radius:16px; background:#e4f2ef; color:#277c80; }
+.isats-course-overview-copy h2 { margin:7px 0 6px; color:#193e46; font-size:clamp(20px,2.4vw,28px); line-height:1.2; letter-spacing:-.045em; }
+.isats-course-overview-copy > p { margin:0; color:#718589; font-size:12px; line-height:1.7; }
+.isats-course-facts { display:flex; flex-wrap:wrap; gap:13px; margin-top:12px; }
+.isats-course-facts span { display:inline-flex; align-items:center; gap:6px; color:#4d7c7e; font-size:10px; font-weight:750; }
+.isats-course-overview-cta { min-height:43px; display:inline-flex; align-items:center; gap:8px; padding:0 17px; border:0; border-radius:999px; background:#17636d; color:#fff; font:inherit; font-size:11px; font-weight:800; cursor:pointer; transition:transform .2s ease,background .2s ease; }
+.isats-course-overview-cta:hover { transform:translateY(-2px); background:#104e58; }
+.isats-course-information { width:min(100% - 48px,1160px); margin:0 auto; }
+.isats-course-information-heading { display:flex; align-items:end; justify-content:space-between; gap:20px; margin-bottom:19px; }
+.isats-course-information-heading h3 { margin:8px 0 0; color:#193e46; font-size:clamp(23px,3vw,32px); letter-spacing:-.05em; }
+.isats-course-information-heading > p { max-width:290px; margin:0 0 3px; color:#819295; font-size:11px; line-height:1.7; }
+.isats-course-tabs { display:flex; flex-wrap:wrap; gap:8px; padding:8px; border:1px solid #e2ece9; border-radius:14px; background:#f6faf9; }
+.isats-course-tabs button { min-height:43px; display:inline-flex; align-items:center; gap:8px; padding:0 14px; border:1px solid transparent; border-radius:10px; background:transparent; color:#6d8586; font:inherit; font-size:10px; font-weight:750; cursor:pointer; transition:background .2s ease,color .2s ease,border-color .2s ease,box-shadow .2s ease; }
+.isats-course-tabs button:hover { color:#216d73; background:#fff; }
+.isats-course-tabs button.is-active { border-color:#d9e9e5; background:#fff; color:#17636d; box-shadow:0 4px 12px rgba(20,65,68,.06); }
+.isats-course-tabs button small { min-width:19px; height:19px; display:grid; place-items:center; padding:0 5px; border-radius:999px; background:#eaf3f1; color:#568181; font-size:9px; }
+.isats-course-tab-panel { min-height:190px; padding:24px 0 5px; }
+.isats-topic-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+.isats-topic-item { min-height:68px; display:flex; align-items:flex-start; gap:12px; padding:14px; border:1px solid #e7efed; border-radius:12px; background:#fff; transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease; }
+.isats-topic-item:hover { transform:translateY(-2px); border-color:#b7d5cf; box-shadow:0 8px 20px rgba(24,70,70,.05); }
+.isats-topic-item > span { flex:0 0 auto; color:#39888a; font-size:9px; font-weight:850; letter-spacing:.08em; }
+.isats-topic-item p { margin:0; color:#526e72; font-size:11px; line-height:1.55; }
+.isats-curriculum-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:13px; align-items:start; }
+.isats-curriculum-tile { min-width:0; padding:19px; border:1px solid #e2ece9; border-radius:14px; background:linear-gradient(150deg,#fff,#f8fbfa); }
+.isats-curriculum-index { color:#419194; font-size:9px; font-weight:850; letter-spacing:.14em; }
+.isats-curriculum-tile h4 { margin:9px 0 5px; color:#244d53; font-size:13px; line-height:1.4; text-transform:capitalize; }
+.isats-curriculum-tile > p { margin:0 0 13px; color:#8a9b9c; font-size:9px; }
+.isats-curriculum-tile ul { display:grid; gap:7px; margin:0; padding:0; list-style:none; }
+.isats-curriculum-tile li { position:relative; padding-left:12px; color:#6b8183; font-size:10px; line-height:1.55; }
+.isats-curriculum-tile li::before { content:''; position:absolute; left:0; top:6px; width:4px; height:4px; border-radius:50%; background:#62a7a0; }
+.isats-info-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:11px; }
+.isats-info-tile { min-height:75px; display:flex; align-items:flex-start; gap:11px; padding:16px; border:1px solid #e5efec; border-radius:12px; background:#fbfdfc; }
+.isats-info-tile svg { flex:0 0 auto; color:#36868a; }
+.isats-info-tile p { margin:0; color:#617b7e; font-size:11px; line-height:1.65; }
+.isats-module-muted { color:#819395; font-size:12px; }
+@media(max-width:850px) {
+ .isats-topic-grid,.isats-info-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ .isats-curriculum-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ .isats-course-overview { grid-template-columns:52px minmax(0,1fr); }
+ .isats-course-overview-cta { grid-column:2; justify-self:start; }
+}
+@media(max-width:600px) {
+ .isats-course-overview,.isats-course-information { width:calc(100% - 36px); }
+ .isats-course-overview { padding:19px; gap:13px; }
+ .isats-course-overview-icon { width:46px; height:46px; border-radius:13px; }
+ .isats-course-overview-copy h2 { font-size:21px; }
+ .isats-course-overview-copy > p { font-size:11px; }
+ .isats-course-overview-cta { grid-column:1/-1; justify-self:stretch; justify-content:center; }
+ .isats-course-information-heading { display:block; }
+ .isats-course-information-heading > p { margin-top:8px; }
+ .isats-course-tabs { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px; }
+ .isats-course-tabs button { justify-content:flex-start; min-height:42px; padding:0 9px; font-size:9px; }
+ .isats-course-tabs button span { flex:1; text-align:left; }
+ .isats-course-tab-panel { padding-top:16px; }
+ .isats-topic-grid,.isats-info-grid,.isats-curriculum-grid { grid-template-columns:1fr; }
+ .isats-topic-item { min-height:unset; }
+}
+@media(prefers-reduced-motion:reduce) {
+ .isats-course-overview-cta,.isats-course-tabs button,.isats-topic-item { transition:none !important; }
+}
