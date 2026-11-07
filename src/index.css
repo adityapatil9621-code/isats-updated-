@@ -1192,3 +1192,104 @@ html { scroll-behavior: smooth; }
 @media(prefers-reduced-motion:reduce) {
  .isats-course-overview-cta,.isats-course-tabs button,.isats-topic-item { transition:none !important; }
 }
+
+
+/* Typography alignment: course pages inherit the site's DM Sans system and editorial heading treatment */
+.isats-programme-page,
+.isats-programme-page button,
+.isats-programme-page a,
+.isats-programme-page input,
+.isats-programme-page p,
+.isats-programme-page span,
+.isats-programme-page li,
+.isats-programme-page small,
+.isats-programme-page h1,
+.isats-programme-page h2,
+.isats-programme-page h3,
+.isats-programme-page h4 {
+  font-family: "DM Sans", sans-serif;
+}
+.isats-programme-hero-copy h1 {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 750;
+  letter-spacing: -.075em;
+}
+.isats-programme-hero-copy h1 em,
+.isats-course-information-heading h3 em {
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -.065em;
+}
+.isats-programme-hero-copy > p {
+  font-size: 15px;
+  font-weight: 450;
+  letter-spacing: -.012em;
+}
+.isats-section-kicker,
+.isats-programme-overline > span:last-child,
+.isats-course-overview-copy > .isats-section-kicker {
+  font-family: "DM Sans", sans-serif;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .18em;
+  line-height: 1.5;
+}
+.isats-course-overview-copy h2 {
+  font-family: "DM Sans", sans-serif;
+  font-size: clamp(23px,2.5vw,30px);
+  font-weight: 750;
+  letter-spacing: -.055em;
+  line-height: 1.12;
+}
+.isats-course-overview-copy > p,
+.isats-course-information-heading > p {
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: -.01em;
+  line-height: 1.75;
+}
+.isats-course-information-heading h3 {
+  font-family: "DM Sans", sans-serif;
+  font-size: clamp(28px,3vw,36px);
+  font-weight: 700;
+  letter-spacing: -.06em;
+  line-height: 1.12;
+}
+.isats-course-tabs button {
+  font-family: "DM Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: -.01em;
+}
+.isats-topic-item p,
+.isats-info-tile p,
+.isats-curriculum-tile li {
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 450;
+  letter-spacing: -.005em;
+  line-height: 1.65;
+}
+.isats-curriculum-tile h4 {
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 750;
+  letter-spacing: -.025em;
+}
+.isats-course-facts span {
+  font-family: "DM Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+}
+.isats-course-overview-cta {
+  font-family: "DM Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 750;
+}
+@media(max-width:600px) {
+  .isats-programme-hero-copy > p { font-size: 13px; }
+  .isats-course-overview-copy h2 { font-size: 22px; }
+  .isats-course-information-heading h3 { font-size: 27px; }
+}
