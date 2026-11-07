@@ -668,8 +668,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid rgba(43,133,141,.4); 
   .isats-brand img { height: 43px; max-width: 190px; }
   .isats-desktop-nav { display: none; }
   .isats-menu-toggle { display: inline-flex; }
-  .isats-mobile-nav { display: block; max-height: 0; overflow: hidden; border-top: 0 solid transparent; background: rgba(255,255,255,.98); transition: max-height .28s ease, border-color .28s ease; }
-  .isats-mobile-nav.is-open { max-height: 430px; border-top: 1px solid #e5eeee; }
+  .isats-mobile-nav { display: block; max-height: 0; overflow: hidden; visibility: hidden; pointer-events: none; border-top: 0 solid transparent; background: rgba(255,255,255,.98); transition: max-height .28s ease, border-color .28s ease, visibility .28s ease; }
+  .isats-mobile-nav.is-open { max-height: 430px; visibility: visible; pointer-events: auto; border-top: 1px solid #e5eeee; }
   .isats-mobile-nav nav { width: calc(100% - 36px); margin: 0 auto; padding: 9px 0 20px; display: grid; gap: 2px; }
   .isats-mobile-nav .isats-nav-link { min-height: 46px; font-size: 14px; }
   .isats-mobile-nav .isats-nav-link::after { display: none; }
