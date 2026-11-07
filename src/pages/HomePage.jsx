@@ -6,7 +6,7 @@ import Header from '@/components/Header.jsx';
 import Footer from '@/components/Footer.jsx';
 import WhatsAppButton from '@/components/WhatsAppButton.jsx';
 import { Button } from '@/components/ui/button.jsx';
-import { Award, Users, Briefcase, IndianRupee, ArrowRight, Sparkles, GraduationCap, MoveUpRight } from 'lucide-react';
+import { Award, Users, Briefcase, IndianRupee, ArrowRight, Sparkles, MoveUpRight } from 'lucide-react';
 
 const highlights = [
   { icon: Award, number: '01', title: 'Recognised learning', description: 'Structured programmes designed around professional standards and practical skills.' },
@@ -51,7 +51,6 @@ export default function HomePage() {
                   <div className="isats-visual-overlay" />
                   <div className="isats-visual-caption"><span className="isats-caption-dot" /><div><strong>Learn by doing</strong><small>Practical skills. Real confidence.</small></div></div>
                 </div>
-                <div className="isats-floating-card"><span className="isats-floating-icon"><GraduationCap size={20} /></span><span><strong>Skills for tomorrow</strong><small>Education with direction</small></span></div>
                 <div className="isats-visual-index">ISATS <span> / </span> LEARN · PRACTICE · GROW</div>
               </motion.div>
             </div>
