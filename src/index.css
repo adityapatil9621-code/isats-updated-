@@ -1293,3 +1293,23 @@ html { scroll-behavior: smooth; }
   .isats-course-overview-copy h2 { font-size: 22px; }
   .isats-course-information-heading h3 { font-size: 27px; }
 }
+
+
+/* Professional, readable vision statement typography */
+.isats-vision-panel p {
+  max-width: 1080px;
+  margin: 0;
+  color: #d4e2e1;
+  font-family: "DM Sans", sans-serif;
+  font-size: 18px;
+  font-weight: 450;
+  letter-spacing: 0;
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+@media (max-width: 768px) {
+  .isats-vision-panel p {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+}
