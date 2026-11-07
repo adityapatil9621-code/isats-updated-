@@ -718,3 +718,168 @@ button:focus-visible, a:focus-visible { outline: 3px solid rgba(43,133,141,.4); 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+
+/* Inner-page design system: courses, about and contact */
+.isats-inner-page { flex: 1; color: #173943; background: #fff; }
+.isats-inner-container { width: min(100% - 64px, 1160px); margin: 0 auto; }
+.isats-page-hero { position: relative; isolation: isolate; overflow: hidden; background: #f0f7f6; }
+.isats-page-hero-orb { position: absolute; z-index: -1; width: 480px; height: 480px; right: -100px; top: -240px; border-radius: 50%; border: 1px solid rgba(49,134,138,.18); box-shadow: 0 0 0 45px rgba(49,134,138,.035),0 0 0 90px rgba(49,134,138,.025); }
+.isats-page-hero-inner { width: min(100% - 64px, 1160px); min-height: 480px; margin: 0 auto; padding: 70px 0; display: grid; grid-template-columns: .95fr 1.05fr; align-items: center; gap: 75px; }
+.isats-page-hero h1, .isats-contact-hero h1 { margin: 21px 0 19px; color: #153943; font-size: clamp(49px,6vw,76px); line-height: 1.02; font-weight: 650; letter-spacing: -.07em; }
+.isats-page-hero h1 em, .isats-contact-hero h1 em, .isats-inner-section-heading h2 em, .isats-about-intro h2 em, .isats-vision-panel h2 em, .isats-contact-map-heading h2 em { color: #31868a; font-family: Georgia,'Times New Roman',serif; font-weight: 400; }
+.isats-page-hero-inner > div:first-child > p { max-width: 470px; color: #687f83; font-size: 14px; line-height: 1.9; }
+.isats-course-hero-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 19px; margin-top: 28px; color: #688185; font-size: 10px; font-weight: 750; letter-spacing: .07em; text-transform: uppercase; }
+.isats-course-hero-meta span:first-child { display: inline-flex; align-items: center; gap: 8px; color: #28757c; }
+.isats-course-hero-art { position: relative; height: 345px; overflow: hidden; border-radius: 18px 18px 100px 18px; background: #dcebe8; box-shadow: 0 25px 55px rgba(26,76,80,.13); }
+.isats-course-hero-art img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.isats-course-art-caption { position: absolute; inset: auto 0 0; display: flex; align-items: center; gap: 16px; padding: 45px 25px 23px; color: #fff; background: linear-gradient(transparent,rgba(12,44,49,.72)); }
+.isats-course-art-caption span { display: grid; place-items: center; width: 43px; height: 43px; border: 1px solid rgba(255,255,255,.6); border-radius: 50%; font-size: 10px; font-weight: 800; }
+.isats-course-art-caption strong { font-size: 14px; }
+.isats-course-list-section { padding: 95px 0 105px; }
+.isats-inner-section-heading { display: flex; align-items: end; justify-content: space-between; gap: 55px; margin-bottom: 38px; }
+.isats-inner-section-heading h2, .isats-contact-map-heading h2 { margin: 17px 0 0; color: #183c45; font-size: clamp(37px,4.3vw,55px); font-weight: 600; line-height: 1.08; letter-spacing: -.06em; }
+.isats-inner-section-heading > p, .isats-contact-map-heading > p { max-width: 365px; margin: 0 0 5px; color: #728589; font-size: 13px; line-height: 1.9; }
+.isats-course-list-section .isats-inner-container > .isats-academic-prompt { margin-bottom: 25px; }
+.isats-course-category-list { display: grid; gap: 22px; margin-top: 28px; }
+.isats-course-category { display: grid; grid-template-columns: minmax(260px,.78fr) minmax(0,1.22fr); min-height: 300px; overflow: hidden; border: 1px solid #e1ecea; border-radius: 18px; background: #fff; box-shadow: 0 10px 32px rgba(26,65,69,.045); transition: transform .25s ease,box-shadow .25s ease,border-color .25s ease; }
+.isats-course-category:hover { transform: translateY(-4px); border-color: #c5dcda; box-shadow: 0 18px 42px rgba(26,65,69,.09); }
+.isats-course-category-image { position: relative; min-height: 100%; overflow: hidden; background: #e5efed; }
+.isats-course-category-image::after { content: ''; position: absolute; inset: 40% 0 0; background: linear-gradient(transparent,rgba(11,46,51,.3)); }
+.isats-course-category-image img { width: 100%; height: 100%; min-height: 300px; display: block; object-fit: cover; transition: transform .55s ease; }
+.isats-course-category:hover .isats-course-category-image img { transform: scale(1.045); }
+.isats-course-category-image > span { position: absolute; z-index: 1; left: 20px; bottom: 17px; color: #fff; font-size: 11px; font-weight: 800; letter-spacing: .15em; }
+.isats-course-category-copy { display: flex; flex-direction: column; align-items: flex-start; padding: clamp(25px,4vw,43px); }
+.isats-course-category-kicker { display: inline-flex; align-items: center; gap: 9px; color: #34838a; font-size: 9px; font-weight: 800; letter-spacing: .15em; }
+.isats-course-category-copy h3 { margin: 18px 0 12px; color: #1a3d46; font-size: clamp(23px,2.4vw,31px); font-weight: 650; letter-spacing: -.045em; }
+.isats-course-category-copy > p { max-width: 570px; margin: 0; color: #728388; font-size: 13px; line-height: 1.85; }
+.isats-course-category-bottom { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 15px; margin-top: auto; padding-top: 24px; }
+.isats-course-category-bottom > span { color: #8b9c9f; font-size: 10px; font-weight: 750; letter-spacing: .05em; }
+.isats-course-link { min-height: 42px; padding: 0 17px; border-radius: 999px; background: #17636d !important; color: #fff !important; }
+.isats-course-link a { display: inline-flex; align-items: center; gap: 9px; }
+.isats-course-guidance { padding: 70px 32px; background: #f1f7f6; }
+.isats-guidance-inner { width: min(100%,1160px); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 60px; }
+.isats-guidance-inner h2, .isats-about-bottom-cta h2 { margin: 16px 0 0; color: #193d45; font-size: clamp(36px,4vw,51px); line-height: 1.08; letter-spacing: -.06em; }
+.isats-guidance-inner h2 em, .isats-about-bottom-cta h2 em { color: #31868a; font-family: Georgia,'Times New Roman',serif; font-weight: 400; }
+.isats-guidance-inner > div:last-child { max-width: 440px; }
+.isats-guidance-inner p { margin: 0 0 20px; color: #728589; font-size: 13px; line-height: 1.85; }
+.isats-about-hero-inner { width: min(100% - 64px,1160px); min-height: 510px; margin: 0 auto; padding: 72px 0; display: grid; grid-template-columns: 1fr .95fr; align-items: center; gap: 85px; }
+.isats-about-hero-inner h1 { margin: 21px 0; color: #163a43; font-size: clamp(47px,5.5vw,70px); line-height: 1.04; font-weight: 650; letter-spacing: -.07em; }
+.isats-about-hero-inner h1 em { color: #31868a; font-family: Georgia,'Times New Roman',serif; font-weight: 400; }
+.isats-about-hero-inner > div:first-child > p { max-width: 440px; margin: 0 0 25px; color: #718489; font-size: 14px; line-height: 1.85; }
+.isats-about-hero-button { min-height: 48px; padding: 0 19px; border-radius: 999px; background: #17636d !important; }
+.isats-about-hero-button a { display: inline-flex; align-items: center; gap: 10px; }
+.isats-about-hero-image { position: relative; height: 360px; overflow: hidden; border-radius: 48% 48% 18px 18px / 34% 34% 18px 18px; background: #dcebe8; box-shadow: 0 25px 55px rgba(26,76,80,.12); }
+.isats-about-hero-image img { width: 100%; height: 100%; display: block; object-fit: cover; }
+.isats-about-image-label { position: absolute; inset: auto 0 0; display: flex; align-items: center; gap: 13px; padding: 48px 22px 20px; color: #fff; background: linear-gradient(transparent,rgba(10,42,48,.7)); }
+.isats-about-image-label span { display: grid; place-items: center; width: 42px; height: 42px; border: 1px solid rgba(255,255,255,.65); border-radius: 50%; font-size: 10px; font-weight: 800; }
+.isats-about-image-label strong { max-width: 210px; font-size: 11px; line-height: 1.5; }
+.isats-about-intro { width: min(100% - 64px,1160px); margin: 0 auto; padding: 105px 0; display: grid; grid-template-columns: .45fr 1fr; gap: 90px; }
+.isats-about-intro-label { display: flex; justify-content: space-between; align-items: flex-start; }
+.isats-about-vertical { color: #9aadae; font-size: 8px; font-weight: 800; letter-spacing: .15em; writing-mode: vertical-rl; }
+.isats-about-intro h2 { margin: 0 0 25px; color: #183c45; font-size: clamp(38px,4.2vw,54px); line-height: 1.08; letter-spacing: -.06em; }
+.isats-about-intro p { max-width: 750px; color: #728388; font-size: 13px; line-height: 1.95; }
+.isats-vision-section { padding: 0 32px 100px; }
+.isats-vision-panel { width: min(100%,1160px); min-height: 290px; margin: 0 auto; padding: 55px clamp(28px,6vw,75px); display: grid; grid-template-columns: 65px 1fr; gap: 28px; align-items: start; border-radius: 20px; background: #123f49; color: #fff; }
+.isats-vision-icon { display: grid; place-items: center; width: 55px; height: 55px; border: 1px solid rgba(160,219,209,.3); border-radius: 15px; color: #9bd1ca; }
+.isats-vision-panel .isats-section-kicker { color: #9bd1ca; }
+.isats-vision-panel h2 { margin: 13px 0; color: #fff; font-size: clamp(32px,3.8vw,47px); line-height: 1.08; letter-spacing: -.055em; }
+.isats-vision-panel h2 em { color: #9bd1ca; }
+.isats-vision-panel p { max-width: 760px; margin: 0; color: #c1d6d4; font-size: 13px; line-height: 1.9; }
+.isats-mission-section { padding: 90px 0 105px; background: #f2f8f7; }
+.isats-mission-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 17px; }
+.isats-mission-card { min-height: 250px; padding: 28px; border: 1px solid #dce9e7; border-radius: 15px; background: rgba(255,255,255,.76); transition: transform .22s ease,box-shadow .22s ease; }
+.isats-mission-card:hover { transform: translateY(-4px); box-shadow: 0 16px 34px rgba(26,65,69,.08); }
+.isats-mission-card-top { display: flex; justify-content: space-between; color: #34838a; }
+.isats-mission-card-top span { color: #9aadae; font-size: 10px; font-weight: 800; letter-spacing: .14em; }
+.isats-mission-card h3 { margin: 39px 0 12px; color: #1b424a; font-size: 17px; font-weight: 700; }
+.isats-mission-card p, .isats-why-card p { margin: 0; color: #75888b; font-size: 12px; line-height: 1.85; }
+.isats-why-section { padding: 95px 0 105px; }
+.isats-why-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 15px; }
+.isats-why-card { padding: 24px 20px; border-top: 1px solid #dce8e6; background: #fff; }
+.isats-why-icon { display: grid; place-items: center; width: 43px; height: 43px; border-radius: 12px; background: #eaf4f2; color: #318087; }
+.isats-why-card h3 { margin: 24px 0 9px; color: #1b424a; font-size: 15px; font-weight: 700; }
+.isats-about-bottom-cta { padding: 80px 24px 90px; text-align: center; background: #f2f8f7; }
+.isats-about-bottom-cta h2 { margin: 17px 0 24px; }
+.isats-about-bottom-cta .isats-cta-button { display: inline-flex; align-items: center; gap: 10px; }
+.isats-contact-hero { position: relative; isolation: isolate; overflow: hidden; min-height: 430px; padding: 80px max(32px,calc((100vw - 1160px)/2)); display: flex; align-items: center; background: #123f49; }
+.isats-contact-hero-pattern { position: absolute; z-index: -1; inset: 0; opacity: .14; background-image: radial-gradient(rgba(255,255,255,.8) .7px,transparent .7px); background-size: 17px 17px; mask-image: linear-gradient(90deg,black,transparent 85%); }
+.isats-contact-hero::after { content: ''; position: absolute; z-index: -1; width: 480px; height: 480px; right: 8%; top: -250px; border: 1px solid rgba(155,209,202,.28); border-radius: 50%; box-shadow: 0 0 0 48px rgba(155,209,202,.04),0 0 0 96px rgba(155,209,202,.025); }
+.isats-contact-hero-inner { width: min(100%,1160px); margin: 0 auto; }
+.isats-contact-hero .isats-section-kicker { color: #9bd1ca; }
+.isats-contact-hero h1 { color: #fff; font-size: clamp(53px,6.2vw,78px); }
+.isats-contact-hero h1 em { color: #9bd1ca; }
+.isats-contact-hero-inner > p { max-width: 490px; color: #c3d7d6; font-size: 14px; line-height: 1.85; }
+.isats-contact-hero-link { display: inline-flex; align-items: center; gap: 10px; margin-top: 18px; padding: 13px 18px; border: 1px solid rgba(178,222,216,.35); border-radius: 999px; color: #e6f5f1; font-size: 12px; font-weight: 700; text-decoration: none; transition: background .2s ease; }
+.isats-contact-hero-link:hover { background: rgba(255,255,255,.1); }
+.isats-contact-hero-side { position: absolute; right: max(32px,calc((100vw - 1160px)/2)); bottom: 48px; display: grid; gap: 7px; text-align: right; color: rgba(255,255,255,.45); }
+.isats-contact-hero-side span { font-size: 27px; font-weight: 800; letter-spacing: -.06em; }
+.isats-contact-hero-side small { max-width: 190px; font-size: 8px; font-weight: 700; line-height: 1.6; letter-spacing: .12em; }
+.isats-contact-details-section { padding: 90px 0 100px; }
+.isats-contact-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 14px; }
+.isats-contact-card { min-width: 0; min-height: 250px; border: 1px solid #e0ebe9; border-radius: 15px; background: #fff; transition: transform .22s ease,box-shadow .22s ease,border-color .22s ease; }
+.isats-contact-card:hover { transform: translateY(-4px); border-color: #c5dcda; box-shadow: 0 16px 36px rgba(26,65,69,.08); }
+.isats-contact-card > a { height: 100%; min-height: 250px; display: flex; flex-direction: column; padding: 22px; color: inherit; text-decoration: none; }
+.isats-contact-card > :not(a) { display: flex; flex-direction: column; padding: 22px; }
+.isats-contact-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 26px; }
+.isats-contact-icon { display: grid; place-items: center; width: 43px; height: 43px; border-radius: 12px; background: #eaf4f2; color: #318087; }
+.isats-contact-card-index { color: #a1b2b3; font-size: 10px; font-weight: 800; letter-spacing: .13em; }
+.isats-contact-card-label { color: #34838a; font-size: 8px; font-weight: 800; letter-spacing: .14em; }
+.isats-contact-card h3 { margin: 8px 0 9px; color: #1c424a; font-size: 15px; font-weight: 750; }
+.isats-contact-card p { margin: 0; color: #74868a; font-size: 11px; line-height: 1.8; overflow-wrap: anywhere; }
+.isats-contact-card-action { display: inline-flex; align-items: center; gap: 7px; margin-top: auto; padding-top: 18px; color: #27747c; font-size: 10px; font-weight: 750; }
+.isats-contact-map-section { padding: 85px 0 100px; background: #f2f8f7; }
+.isats-contact-map-heading { display: flex; align-items: end; justify-content: space-between; gap: 45px; margin-bottom: 30px; }
+.isats-contact-map-frame { overflow: hidden; padding: 9px; border: 1px solid #dce9e7; border-radius: 17px; background: #fff; box-shadow: 0 15px 38px rgba(26,65,69,.06); }
+.isats-contact-map-frame > * { border-radius: 11px; overflow: hidden; }
+@media(max-width: 900px) {
+  .isats-page-hero-inner, .isats-about-hero-inner { gap: 38px; }
+  .isats-contact-grid, .isats-why-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .isats-mission-grid { grid-template-columns: 1fr; }
+  .isats-mission-card { min-height: 0; }
+}
+@media(max-width: 700px) {
+  .isats-inner-container, .isats-page-hero-inner, .isats-about-hero-inner, .isats-about-intro { width: calc(100% - 40px); }
+  .isats-page-hero-inner, .isats-about-hero-inner { min-height: 0; padding: 58px 0 52px; grid-template-columns: 1fr; gap: 34px; }
+  .isats-page-hero h1, .isats-about-hero-inner h1 { font-size: clamp(46px,12vw,62px); }
+  .isats-course-hero-art { height: 260px; border-radius: 16px 16px 70px 16px; }
+  .isats-about-hero-image { height: 285px; }
+  .isats-course-list-section, .isats-contact-details-section { padding: 68px 0 75px; }
+  .isats-inner-section-heading, .isats-contact-map-heading { display: block; margin-bottom: 27px; }
+  .isats-inner-section-heading > p, .isats-contact-map-heading > p { margin-top: 16px; }
+  .isats-course-category { grid-template-columns: 1fr; }
+  .isats-course-category-image img { height: 220px; min-height: 220px; }
+  .isats-course-category-copy { padding: 24px 21px; }
+  .isats-course-category-copy h3 { font-size: 24px; }
+  .isats-course-category-bottom { align-items: flex-start; flex-direction: column; }
+  .isats-course-guidance { padding: 55px 20px; }
+  .isats-guidance-inner { display: block; }
+  .isats-guidance-inner > div:last-child { margin-top: 18px; }
+  .isats-about-intro { padding: 70px 0; grid-template-columns: 1fr; gap: 23px; }
+  .isats-about-intro-label { min-height: 25px; }
+  .isats-about-vertical { writing-mode: initial; }
+  .isats-vision-section { padding: 0 20px 70px; }
+  .isats-vision-panel { padding: 31px 23px; grid-template-columns: 1fr; gap: 19px; }
+  .isats-mission-section, .isats-why-section { padding: 68px 0 75px; }
+  .isats-why-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .isats-why-card { padding: 18px 14px; }
+  .isats-why-card h3 { font-size: 13px; }
+  .isats-why-card p { font-size: 11px; }
+  .isats-about-bottom-cta { padding: 65px 18px 72px; }
+  .isats-contact-hero { min-height: 410px; padding: 65px 20px 100px; }
+  .isats-contact-hero h1 { font-size: clamp(50px,13vw,68px); }
+  .isats-contact-hero-side { right: 20px; bottom: 25px; }
+  .isats-contact-details-section { padding-bottom: 65px; }
+  .isats-contact-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .isats-contact-card, .isats-contact-card > a { min-height: 235px; }
+  .isats-contact-card > a, .isats-contact-card > :not(a) { padding: 17px 14px; }
+  .isats-contact-card-top { margin-bottom: 20px; }
+  .isats-contact-card h3 { font-size: 13px; }
+  .isats-contact-card p { font-size: 10px; }
+  .isats-contact-card-action { font-size: 9px; }
+  .isats-contact-map-section { padding: 65px 0 75px; }
+}
+@media(max-width: 390px) {
+  .isats-contact-grid, .isats-why-grid { grid-template-columns: 1fr; }
+  .isats-contact-card, .isats-contact-card > a { min-height: 210px; }
+}
