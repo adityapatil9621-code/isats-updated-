@@ -821,18 +821,37 @@ function RequireAuth({ children }) {
 
 function RouteReveal({ children }) {
   const [origin] = useState(() => consumeTransitionOrigin());
-  const clip = origin ? `circle(300vmax at ${origin.x}px ${origin.y}px)` : null;
 
   return (
-    <motion.div
-      className="isats-route-transition"
-      initial={origin ? { clipPath: `circle(0px at ${origin.x}px ${origin.y}px)` } : { opacity: 0, y: 10 }}
-      animate={origin ? { clipPath: clip } : { opacity: 1, y: 0 }}
-      transition={{ duration: origin ? 0.95 : 0.32, ease: [0.22, 1, 0.36, 1] }}
-      onAnimationComplete={clearTransitionOrigin}
-    >
-      {children}
-    </motion.div>
+    <>
+      <motion.div
+        className="isats-route-transition"
+        initial={{ opacity: 0.72, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+      >
+        {children}
+      </motion.div>
+      {origin && (
+        <motion.div
+          aria-hidden="true"
+          className="isats-blue-page-reveal"
+          initial={{
+            clipPath: `circle(0px at ${origin.x}px ${origin.y}px)`,
+            opacity: 1
+          }}
+          animate={{
+            clipPath: `circle(160vmax at ${origin.x}px ${origin.y}px)`,
+            opacity: [1, 1, 0]
+          }}
+          transition={{
+            clipPath: { duration: 0.82, ease: [0.22, 1, 0.36, 1] },
+            opacity: { duration: 0.98, times: [0, 0.72, 1], ease: 'easeOut' }
+          }}
+          onAnimationComplete={clearTransitionOrigin}
+        />
+      )}
+    </>
   );
 }
 
