@@ -883,3 +883,87 @@ button:focus-visible, a:focus-visible { outline: 3px solid rgba(43,133,141,.4); 
   .isats-contact-grid, .isats-why-grid { grid-template-columns: 1fr; }
   .isats-contact-card, .isats-contact-card > a { min-height: 210px; }
 }
+
+
+/* Authentication screens — modern ISATS split-layout treatment */
+.isats-auth-layout { min-height: 100svh; display: grid; grid-template-columns: minmax(0,1.02fr) minmax(460px,.98fr); background: #fff; color: #183b44; }
+.isats-auth-visual { position: sticky; top: 0; height: 100svh; min-height: 660px; overflow: hidden; isolation: isolate; display: flex; flex-direction: column; justify-content: space-between; padding: 42px clamp(35px,6vw,88px) 34px; background: #123f49; color: #fff; }
+.isats-auth-visual::before { content: ''; position: absolute; z-index: -2; inset: 0; background: linear-gradient(120deg,rgba(9,43,50,.92),rgba(13,61,68,.76) 52%,rgba(10,47,54,.5)),url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1500&q=85') center/cover; }
+.isats-auth-visual::after { content: ''; position: absolute; z-index: -1; width: 560px; height: 560px; right: -200px; bottom: -250px; border: 1px solid rgba(177,225,217,.25); border-radius: 50%; box-shadow: 0 0 0 45px rgba(177,225,217,.05),0 0 0 90px rgba(177,225,217,.035); }
+.isats-register-visual::before { background-image: linear-gradient(120deg,rgba(9,43,50,.92),rgba(13,61,68,.76) 52%,rgba(10,47,54,.5)),url('https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=1500&q=85'); }
+.isats-auth-logo, .isats-auth-mobile-logo { display: inline-flex; align-items: baseline; width: fit-content; color: #fff; font-size: 25px; font-weight: 850; letter-spacing: .13em; text-decoration: none; }
+.isats-auth-logo span, .isats-auth-mobile-logo span { color: #8fd0c6; }
+.isats-auth-visual-copy { max-width: 570px; margin: auto 0; padding: 70px 0; }
+.isats-auth-kicker { display: inline-flex; align-items: center; gap: 10px; color: #9bd1ca; font-size: 9px; font-weight: 800; letter-spacing: .2em; }
+.isats-auth-kicker::before { content: ''; width: 24px; height: 1px; background: #9bd1ca; }
+.isats-auth-visual-copy h1 { margin: 25px 0 20px; color: #fff; font-size: clamp(53px,6.4vw,88px); font-weight: 600; line-height: .98; letter-spacing: -.075em; }
+.isats-auth-visual-copy h1 em { color: #9bd1ca; font-family: Georgia,'Times New Roman',serif; font-weight: 400; }
+.isats-auth-visual-copy p { max-width: 440px; margin: 0; color: rgba(237,249,247,.76); font-size: 14px; line-height: 1.9; }
+.isats-auth-visual-footer { display: flex; justify-content: space-between; gap: 20px; color: rgba(224,242,239,.55); font-size: 8px; font-weight: 750; letter-spacing: .14em; line-height: 1.6; }
+.isats-auth-form-side { min-width: 0; min-height: 100svh; display: flex; justify-content: center; align-items: center; padding: 44px clamp(28px,5vw,76px); background: #fff; }
+.isats-auth-form-wrap { width: min(100%,430px); margin: auto; }
+.isats-auth-back { display: inline-flex; align-items: center; gap: 8px; color: #839598; font-size: 11px; font-weight: 650; text-decoration: none; transition: color .2s ease; }
+.isats-auth-back:hover { color: #226d75; }
+.isats-auth-mobile-logo { display: none; color: #174d55; }
+.isats-auth-heading { margin: 55px 0 30px; }
+.isats-auth-heading .isats-section-kicker { font-size: 9px; }
+.isats-auth-heading h2 { margin: 15px 0 10px; color: #183b44; font-size: clamp(36px,4vw,47px); font-weight: 650; line-height: 1.06; letter-spacing: -.065em; }
+.isats-auth-heading h2 em { color: #31868a; font-family: Georgia,'Times New Roman',serif; font-weight: 400; }
+.isats-auth-heading p { margin: 0; color: #7a8c8f; font-size: 13px; line-height: 1.7; }
+.isats-auth-google { width: 100%; min-height: 50px; display: flex; justify-content: center; align-items: center; gap: 12px; border: 1px solid #dce7e6; border-radius: 10px; background: #fff; color: #29464d; font: inherit; font-size: 12px; font-weight: 700; cursor: pointer; transition: border-color .2s ease,background .2s ease,transform .2s ease; }
+.isats-auth-google:hover:not(:disabled) { border-color: #a9ccca; background: #f8fbfa; transform: translateY(-1px); }
+.isats-auth-google:disabled, .isats-auth-submit:disabled { opacity: .58; cursor: not-allowed; }
+.isats-auth-divider { display: flex; align-items: center; gap: 14px; margin: 24px 0; color: #9aa8aa; font-size: 10px; }
+.isats-auth-divider::before, .isats-auth-divider::after { content: ''; height: 1px; flex: 1; background: #e9efee; }
+.isats-auth-form { display: grid; gap: 18px; }
+.isats-auth-field { display: grid; gap: 8px; }
+.isats-auth-field label { color: #38545a; font-size: 11px; font-weight: 750; }
+.isats-auth-field input { width: 100%; min-height: 49px; padding: 0 14px; border: 1px solid #dce6e5; border-radius: 9px; outline: none; background: #fbfdfc; color: #173943; font: inherit; font-size: 13px; transition: border-color .2s ease,box-shadow .2s ease,background .2s ease; }
+.isats-auth-field input::placeholder { color: #aab7b7; }
+.isats-auth-field input:focus { border-color: #39858a; background: #fff; box-shadow: 0 0 0 3px rgba(49,134,138,.11); }
+.isats-auth-field input:disabled { opacity: .65; }
+.isats-auth-field small { color: #879799; font-size: 10px; }
+.isats-auth-submit { width: 100%; min-height: 51px; margin-top: 3px; display: inline-flex; align-items: center; justify-content: center; gap: 11px; border: 0; border-radius: 9px; background: #17636d; color: #fff; font: inherit; font-size: 12px; font-weight: 750; cursor: pointer; box-shadow: 0 9px 20px rgba(23,99,109,.14); transition: transform .2s ease,background .2s ease,box-shadow .2s ease; }
+.isats-auth-submit:hover:not(:disabled) { transform: translateY(-2px); background: #104e58; box-shadow: 0 12px 24px rgba(23,99,109,.19); }
+.isats-auth-switch { margin: 26px 0 0; color: #819194; text-align: center; font-size: 11px; }
+.isats-auth-switch a { color: #216d75; font-weight: 800; text-decoration: none; }
+.isats-auth-switch a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.isats-auth-security { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 38px; color: #9aabaa; font-size: 10px; }
+.isats-auth-security svg { color: #4b9991; }
+.isats-register-form-wrap { padding: 24px 0; }
+.isats-register-form-wrap .isats-auth-heading { margin: 34px 0 23px; }
+.isats-register-form-wrap .isats-auth-divider { margin: 18px 0; }
+.isats-register-form-wrap .isats-auth-form { gap: 13px; }
+.isats-register-form-wrap .isats-auth-field { gap: 6px; }
+.isats-register-form-wrap .isats-auth-field input { min-height: 44px; }
+.isats-register-legal { margin: 17px 0 0; color: #8a999a; font-size: 10px; line-height: 1.7; }
+.isats-register-legal a { color: #216d75; font-weight: 700; text-decoration: none; }
+.isats-register-form-wrap .isats-auth-switch { margin-top: 17px; }
+.isats-register-form-wrap .isats-auth-security { margin-top: 22px; }
+.isats-auth-layout .auth-message { margin-bottom: 17px; }
+.isats-auth-layout button:focus-visible, .isats-auth-layout a:focus-visible, .isats-auth-layout input:focus-visible { outline: 3px solid rgba(49,134,138,.25); outline-offset: 3px; }
+@media(max-width: 900px) {
+  .isats-auth-layout { grid-template-columns: minmax(0,.85fr) minmax(400px,1.15fr); }
+  .isats-auth-visual { padding: 32px 30px 27px; }
+  .isats-auth-visual-copy h1 { font-size: clamp(47px,6vw,65px); }
+  .isats-auth-visual-footer { flex-direction: column; gap: 5px; }
+  .isats-auth-form-side { padding: 35px 30px; }
+}
+@media(max-width: 680px) {
+  .isats-auth-layout { min-height: 100svh; display: block; background: #f5f9f8; }
+  .isats-auth-visual { display: none; }
+  .isats-auth-form-side { min-height: 100svh; align-items: flex-start; padding: 25px 20px 38px; background: linear-gradient(180deg,#edf6f4 0,#f7faf9 220px,#fff 220px); }
+  .isats-auth-form-wrap { width: min(100%,440px); padding: 0; }
+  .isats-auth-mobile-logo { display: inline-flex; margin-bottom: 30px; font-size: 22px; }
+  .isats-auth-back { float: right; margin-top: 7px; }
+  .isats-auth-heading { clear: both; margin: 45px 0 26px; }
+  .isats-auth-heading h2 { font-size: 39px; }
+  .isats-auth-google { min-height: 49px; }
+  .isats-auth-security { margin-top: 30px; }
+  .isats-register-form-wrap { padding: 0; }
+  .isats-register-form-wrap .isats-auth-heading { margin: 27px 0 21px; }
+  .isats-register-form-wrap .isats-auth-form { gap: 12px; }
+}
+@media(prefers-reduced-motion: reduce) {
+  .isats-auth-layout *, .isats-auth-layout *::before, .isats-auth-layout *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
