@@ -1009,3 +1009,17 @@ html { scroll-behavior: smooth; }
 @media(prefers-reduced-motion: reduce) {
   .isats-route-transition { clip-path: none !important; }
 }
+
+
+/* Visible blue origin reveal overlay for route changes */
+.isats-blue-page-reveal {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  background: #1769d2;
+  will-change: clip-path, opacity;
+}
+@media (prefers-reduced-motion: reduce) {
+  .isats-blue-page-reveal { display: none; }
+}
