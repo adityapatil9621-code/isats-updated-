@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const REVEAL_TARGETS = [
   '.isats-inner-section-heading',
@@ -14,6 +15,7 @@ const REVEAL_TARGETS = [
 ].join(',');
 
 export default function MotionEnhancements() {
+  const location = useLocation();
   useEffect(() => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduceMotion) return undefined;
@@ -52,7 +54,7 @@ export default function MotionEnhancements() {
         element.style.removeProperty('--isats-reveal-delay');
       });
     };
-  }, []);
+  }, [location.pathname]);
 
   return null;
 }
