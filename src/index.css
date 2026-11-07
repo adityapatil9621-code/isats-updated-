@@ -997,3 +997,15 @@ html { scroll-behavior: smooth; }
   *,*::before,*::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   .isats-reveal-pending { opacity: 1; transform: none; }
 }
+
+
+/* Click-origin page reveal */
+.isats-route-transition { min-height: 100vh; width: 100%; }
+.isats-primary-button:active, .isats-cta-button:active, .isats-course-link:active, .isats-about-hero-button:active, .isats-nav-cta:active, .isats-contact-hero-link:active {
+  transform: translateY(1px) scale(.97);
+  transition-duration: .1s;
+}
+.isats-primary-button, .isats-cta-button, .isats-course-link, .isats-about-hero-button, .isats-nav-cta { transform-origin: center; }
+@media(prefers-reduced-motion: reduce) {
+  .isats-route-transition { clip-path: none !important; }
+}
