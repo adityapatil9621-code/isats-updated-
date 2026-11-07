@@ -10,7 +10,7 @@ import {
 } from 'react-router-dom';
 
 import ScrollToTop from '@/components/ScrollToTop.jsx';
-import MotionEnhancements, { consumeTransitionOrigin } from '@/components/MotionEnhancements.jsx';
+import MotionEnhancements, { clearTransitionOrigin, consumeTransitionOrigin } from '@/components/MotionEnhancements.jsx';
 
 import HomePage from '@/pages/HomePage.jsx';
 import AboutUsPage from '@/pages/AboutUsPage.jsx';
@@ -828,7 +828,8 @@ function RouteReveal({ children }) {
       className="isats-route-transition"
       initial={origin ? { clipPath: `circle(0px at ${origin.x}px ${origin.y}px)` } : { opacity: 0, y: 10 }}
       animate={origin ? { clipPath: clip } : { opacity: 1, y: 0 }}
-      transition={{ duration: origin ? 0.82 : 0.32, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: origin ? 0.95 : 0.32, ease: [0.22, 1, 0.36, 1] }}
+      onAnimationComplete={clearTransitionOrigin}
     >
       {children}
     </motion.div>
