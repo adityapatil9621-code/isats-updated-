@@ -4,10 +4,12 @@ import { useLocation } from 'react-router-dom';
 let pendingTransitionOrigin = null;
 
 export function consumeTransitionOrigin() {
-  const origin = pendingTransitionOrigin;
-  pendingTransitionOrigin = null;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return null;
-  return origin;
+  return pendingTransitionOrigin;
+}
+
+export function clearTransitionOrigin() {
+  pendingTransitionOrigin = null;
 }
 
 const REVEAL_TARGETS = [
@@ -29,12 +31,13 @@ export default function MotionEnhancements() {
   useEffect(() => {
     const rememberOrigin = (event) => {
       if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-      const link = event.target.closest('a[href]');
+      const target = event.target instanceof Element ? event.target : event.target?.parentElement;
+      const link = target?.closest('a[href]');
       if (!link || link.target === '_blank' || link.hasAttribute('download')) return;
       const destination = new URL(link.href, window.location.href);
       if (destination.origin !== window.location.origin || destination.pathname === window.location.pathname) return;
       const rect = link.getBoundingClientRect();
-      pendingTransitionOrigin = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+      pendingTransitionOrigin = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2, scrollY: window.scrollY, path: destination.pathname };
     };
     document.addEventListener('click', rememberOrigin, true);
     return () => document.removeEventListener('click', rememberOrigin, true);
