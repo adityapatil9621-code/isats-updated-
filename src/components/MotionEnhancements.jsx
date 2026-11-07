@@ -1,6 +1,15 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
+let pendingTransitionOrigin = null;
+
+export function consumeTransitionOrigin() {
+  const origin = pendingTransitionOrigin;
+  pendingTransitionOrigin = null;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return null;
+  return origin;
+}
+
 const REVEAL_TARGETS = [
   '.isats-inner-section-heading',
   '.isats-contact-card',
@@ -16,6 +25,21 @@ const REVEAL_TARGETS = [
 
 export default function MotionEnhancements() {
   const location = useLocation();
+
+  useEffect(() => {
+    const rememberOrigin = (event) => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const link = event.target.closest('a[href]');
+      if (!link || link.target === '_blank' || link.hasAttribute('download')) return;
+      const destination = new URL(link.href, window.location.href);
+      if (destination.origin !== window.location.origin || destination.pathname === window.location.pathname) return;
+      const rect = link.getBoundingClientRect();
+      pendingTransitionOrigin = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+    };
+    document.addEventListener('click', rememberOrigin, true);
+    return () => document.removeEventListener('click', rememberOrigin, true);
+  }, []);
+
   useEffect(() => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduceMotion) return undefined;
