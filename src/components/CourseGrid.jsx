@@ -1,58 +1,71 @@
 import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowDown, ArrowUpRight, BookOpen, CheckCircle2, Clock3, GraduationCap, Layers3, MessageCircle, Sparkles, Target, Users } from 'lucide-react';
+import { ArrowUpRight, BookOpen, CheckCircle2, Clock3, GraduationCap, Layers3, MessageCircle, Sparkles, Target, Users } from 'lucide-react';
 import CourseEnquiryModal from '@/components/CourseEnquiryModal.jsx';
 
-const list = (items) => Array.isArray(items) ? items : [];
+const safeList = (value) => Array.isArray(value) ? value : [];
+const labelize = (value) => value.replaceAll('_', ' ');
 
-function DetailList({ title, items, icon: Icon }) {
-  if (!list(items).length) return null;
-  return <section className="isats-module-detail-block"><h4><Icon size={17} />{title}</h4><ul>{items.map((item, index) => <li key={index}><span />{item}</li>)}</ul></section>;
+function TopicGrid({ items }) {
+  const topics = safeList(items);
+  if (!topics.length) return <p className="isats-module-muted">Course topics will be updated soon.</p>;
+  return <div className="isats-topic-grid">{topics.map((topic, index) => <div className="isats-topic-item" key={index}><span>{String(index + 1).padStart(2, '0')}</span><p>{topic}</p></div>)}</div>;
 }
 
-function Curriculum({ curriculum }) {
-  if (!curriculum || typeof curriculum !== 'object') return null;
-  return <div className="isats-module-curriculum"><div className="isats-module-detail-heading"><Layers3 size={18} /><h4>Curriculum breakdown</h4></div><div className="isats-module-curriculum-grid">{Object.entries(curriculum).map(([section, value]) => {
-    const entries = section === 'basic_vs_advanced' && value && typeof value === 'object' ? Object.entries(value).map(([label, items]) => ({ label, items })) : [{ label: section, items: value }];
-    return entries.map(({ label, items }) => <div className="isats-module-curriculum-card" key={label}><span>{label.replaceAll('_', ' ')}</span>{Array.isArray(items) && <ul>{items.map((item, index) => <li key={index}>{item}</li>)}</ul>}</div>);
-  })}</div></div>;
+function CurriculumGrid({ curriculum }) {
+  if (!curriculum || typeof curriculum !== 'object') return <TopicGrid items={[]} />;
+  const sections = Object.entries(curriculum).flatMap(([section, value]) => {
+    if (section === 'basic_vs_advanced' && value && typeof value === 'object') {
+      return Object.entries(value).map(([name, items]) => ({ name, items }));
+    }
+    return [{ name: section, items: value }];
+  }).filter(({ items }) => Array.isArray(items) && items.length);
+  return <div className="isats-curriculum-grid">{sections.map(({ name, items }, index) => <motion.article className="isats-curriculum-tile" key={name} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: Math.min(index * .045, .2) }}><span className="isats-curriculum-index">0{index + 1}</span><h4>{labelize(name)}</h4><p>{items.length} learning areas</p><ul>{items.map((item, itemIndex) => <li key={itemIndex}>{item}</li>)}</ul></motion.article>)}</div>;
+}
+
+function InfoPanel({ tab, course, syllabus }) {
+  const outcomes = safeList(course.outcomes);
+  const eligible = safeList(course.who_can_enroll);
+  const highlights = safeList(course.highlights);
+  const careers = safeList(course.career_options || course.careerOptions);
+  if (tab === 'modules') return course.curriculum ? <CurriculumGrid curriculum={course.curriculum} /> : <TopicGrid items={syllabus} />;
+  if (tab === 'outcomes') return <div className="isats-info-grid">{outcomes.map((item, index) => <article className="isats-info-tile" key={index}><CheckCircle2 size={18}/><p>{item}</p></article>)}</div>;
+  if (tab === 'eligibility') return <div className="isats-info-grid">{eligible.map((item, index) => <article className="isats-info-tile" key={index}><Users size={18}/><p>{item}</p></article>)}</div>;
+  return <div className="isats-info-grid">{highlights.map((item, index) => <article className="isats-info-tile" key={index}><Sparkles size={18}/><p>{item}</p></article>)}{careers.map((item, index) => <article className="isats-info-tile" key={`career-${index}`}><Target size={18}/><p>{item}</p></article>)}</div>;
 }
 
 export default function CourseGrid({ courses = [], category = 'programme' }) {
   const [selectedCourse, setSelectedCourse] = useState(null);
-  const [expandedId, setExpandedId] = useState(null);
-  const safeCourses = Array.isArray(courses) ? courses : [];
-  if (!safeCourses.length) return <div className="isats-module-empty"><BookOpen size={26} /><h3>Course details are being updated</h3><p>Please contact our admissions team for the latest programme information.</p></div>;
+  const [activeTab, setActiveTab] = useState('modules');
+  const course = (Array.isArray(courses) ? courses : [])[0];
+  if (!course) return <div className="isats-module-empty"><BookOpen size={26}/><h3>Course details are being updated</h3><p>Please contact our admissions team for the latest programme information.</p></div>;
+  const title = course.title || course.name || 'ISATS course';
+  const syllabus = safeList(course.syllabus);
+  const tabs = [
+    { id: 'modules', label: 'Course modules', icon: Layers3, count: course.curriculum ? Object.keys(course.curriculum).length : syllabus.length },
+    { id: 'outcomes', label: 'What you’ll learn', icon: Target, count: safeList(course.outcomes).length },
+    { id: 'eligibility', label: 'Who can enrol', icon: Users, count: safeList(course.who_can_enroll).length },
+    { id: 'overview', label: 'Training benefits', icon: Sparkles, count: safeList(course.highlights).length },
+  ].filter((tab) => tab.id === 'modules' || tab.count > 0);
 
   return <>
-    <div className="isats-module-section-heading"><div><span className="isats-section-kicker">EXPLORE THE PROGRAMME</span><h2>Built around <em>what you learn.</em></h2></div><p>Explore the topics, practical learning areas and outcomes included in this programme.</p></div>
-    <div className="isats-module-card-list">
-      {safeCourses.map((course, index) => {
-        const id = course.id || `${category}-${index}`;
-        const title = course.title || course.name || 'ISATS course';
-        const expanded = expandedId === id;
-        const syllabus = list(course.syllabus);
-        const outcomes = list(course.outcomes);
-        const eligibility = list(course.who_can_enroll);
-        const highlights = list(course.highlights);
-        return <motion.article className={`isats-module-card ${expanded ? 'is-expanded' : ''}`} key={id} initial={{ opacity: 0, y: 26 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .12 }} transition={{ duration: .55, delay: Math.min(index * .08, .24), ease: [.22, 1, .36, 1] }} whileHover={{ y: -4 }}>
-          <div className="isats-module-card-topline"><span>MODULE {String(index + 1).padStart(2, '0')}</span><span>{category.toUpperCase()}</span></div>
-          <div className="isats-module-card-main">
-            <div className="isats-module-card-symbol"><BookOpen size={23} /></div>
-            <div className="isats-module-card-title"><h3>{title}</h3><p>{course.description || 'Explore the key learning areas and practical topics covered in this programme.'}</p></div>
-            <div className="isats-module-card-meta">{course.duration && <span><Clock3 size={14} />{course.duration}</span>}{course.eligibility && <span><GraduationCap size={14} />{course.eligibility}</span>}<span><Layers3 size={14} />{syllabus.length} topics</span></div>
-          </div>
-          <div className="isats-module-card-bottom"><span><Sparkles size={15} /> Practical learning pathway</span><div>
-            <button type="button" className="isats-module-expand" aria-expanded={expanded} onClick={() => setExpandedId(expanded ? null : id)}>{expanded ? 'Hide details' : 'View modules'} {expanded ? <ArrowUpRight size={16} /> : <ArrowDown size={16} />}</button>
-            <button type="button" className="isats-module-enquire" onClick={() => setSelectedCourse(course)}><MessageCircle size={16} /> Enquire</button>
-          </div></div>
-          <AnimatePresence initial={false}>{expanded && <motion.div className="isats-module-expanded" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: .42, ease: [.22, 1, .36, 1] }}><div className="isats-module-expanded-inner">
-            <DetailList title="Topics covered" items={syllabus} icon={BookOpen} /><DetailList title="Learning outcomes" items={outcomes} icon={Target} /><DetailList title="Who can enrol" items={eligibility} icon={Users} /><DetailList title="Training highlights" items={highlights} icon={Sparkles} /><Curriculum curriculum={course.curriculum} /><DetailList title="Career pathways" items={course.career_options || course.careerOptions} icon={CheckCircle2} />
-            <button type="button" className="isats-module-expanded-cta" onClick={() => setSelectedCourse(course)}>Ask about this programme <ArrowUpRight size={16} /></button>
-          </div></motion.div>}</AnimatePresence>
-        </motion.article>;
-      })}
-    </div>
-    <CourseEnquiryModal course={selectedCourse} open={Boolean(selectedCourse)} onClose={() => setSelectedCourse(null)} />
+    <motion.section className="isats-course-overview" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .5 }}>
+      <div className="isats-course-overview-icon"><BookOpen size={26}/></div>
+      <div className="isats-course-overview-copy"><span className="isats-section-kicker">{category.replaceAll('-', ' ').toUpperCase()} PROGRAMME</span><h2>{title}</h2><p>{course.description || 'A focused, skill-based learning pathway combining subject knowledge with practical training.'}</p><div className="isats-course-facts">{course.duration && <span><Clock3 size={15}/>{course.duration}</span>}{course.eligibility && <span><GraduationCap size={15}/>{course.eligibility}</span>}<span><Layers3 size={15}/>{syllabus.length || 'Multiple'} topics</span></div></div>
+      <button type="button" className="isats-course-overview-cta" onClick={() => setSelectedCourse(course)}><MessageCircle size={17}/> Enquire now <ArrowUpRight size={15}/></button>
+    </motion.section>
+
+    <section className="isats-course-information">
+      <div className="isats-course-information-heading"><div><span className="isats-section-kicker">PROGRAMME DETAILS</span><h3>Explore the learning path</h3></div><p>Choose a section to view the information you need.</p></div>
+      <div className="isats-course-tabs" role="tablist" aria-label="Course information">
+        {tabs.map(({ id, label, icon: Icon, count }) => <button key={id} type="button" role="tab" aria-selected={activeTab === id} className={activeTab === id ? 'is-active' : ''} onClick={() => setActiveTab(id)}><Icon size={16}/><span>{label}</span><small>{count}</small></button>)}
+      </div>
+      <AnimatePresence mode="wait">
+        <motion.div key={activeTab} role="tabpanel" className="isats-course-tab-panel" initial={{ opacity: 0, y: 9 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: .22 }}>
+          <InfoPanel tab={activeTab} course={course} syllabus={syllabus}/>
+        </motion.div>
+      </AnimatePresence>
+    </section>
+    <CourseEnquiryModal course={selectedCourse} open={Boolean(selectedCourse)} onClose={() => setSelectedCourse(null)}/>
   </>;
 }
