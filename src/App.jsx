@@ -1,13 +1,16 @@
 
 import React, { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import {
   Route,
   Routes,
   BrowserRouter as Router,
-  Navigate
+  Navigate,
+  useLocation
 } from 'react-router-dom';
 
 import ScrollToTop from '@/components/ScrollToTop.jsx';
+import MotionEnhancements from '@/components/MotionEnhancements.jsx';
 
 import HomePage from '@/pages/HomePage.jsx';
 import AboutUsPage from '@/pages/AboutUsPage.jsx';
@@ -817,11 +820,21 @@ function RequireAuth({ children }) {
 ===================================================== */
 
 function MainWebsite() {
+  const location = useLocation();
   return (
     <>
       <ScrollToTop />
-
-      <Routes>
+      <MotionEnhancements />
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={location.pathname}
+          className="isats-route-transition"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -7 }}
+          transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+        >
+      <Routes location={location}>
         {/* Public pages */}
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutUsPage />} />
@@ -898,6 +911,8 @@ function MainWebsite() {
           element={<Navigate to="/" replace />}
         />
       </Routes>
+        </motion.div>
+      </AnimatePresence>
     </>
   );
 }
